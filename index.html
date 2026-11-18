@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 Bài tập ôn — Linh (B1 Giao tiếp)</title>
+<style>
+  :root{
+    --primary:#1f6fb2;
+    --primary-dark:#1f5f99;
+    --primary-light:#eaf2fa;
+    --text:#1e293b;
+    --muted:#94a3b8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Outfit','Segoe UI',Arial,sans-serif;
+    background:var(--primary-light);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:32px 16px 60px;
+  }
+  .hero{
+    max-width:640px;
+    width:100%;
+    text-align:center;
+    margin-bottom:28px;
+  }
+  .kicker{
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--primary-dark);
+    margin-bottom:8px;
+  }
+  .hero h1{
+    font-size:1.9rem;
+    font-weight:800;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-bottom:10px;
+    line-height:1.25;
+  }
+  .hero p{
+    color:#475569;
+    font-size:.95rem;
+    line-height:1.5;
+  }
+  .byline{
+    font-style:italic;
+    color:var(--muted);
+    font-size:.8rem;
+    margin-top:10px;
+  }
+  .section{
+    max-width:640px;
+    width:100%;
+  }
+  .section-heading{
+    font-size:1.05rem;
+    font-weight:700;
+    color:var(--primary-dark);
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .items{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:#fff;
+    border:1px solid #d5e4f2;
+    border-radius:14px;
+    padding:14px 16px;
+    text-decoration:none;
+    color:var(--text);
+    box-shadow:0 1px 3px rgba(31,95,153,0.08);
+    transition:transform .15s, box-shadow .15s;
+  }
+  .item:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 16px rgba(31,95,153,0.15);
+  }
+  .badge{
+    flex-shrink:0;
+    width:40px;
+    height:40px;
+    border-radius:10px;
+    background:var(--primary);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:1.05rem;
+  }
+  .item-body{flex:1;min-width:0}
+  .item-title{font-weight:700;font-size:.98rem;margin-bottom:2px}
+  .item-sub{font-size:.82rem;color:var(--muted)}
+  .item-arrow{color:var(--primary);font-size:1.3rem;flex-shrink:0}
+  .footer{
+    max-width:640px;
+    width:100%;
+    background:#fff;
+    border-radius:14px;
+    padding:16px 18px;
+    font-size:.85rem;
+    color:#475569;
+    line-height:1.6;
+    border:1px solid #d5e4f2;
+  }
+  .footer b{color:var(--primary-dark)}
+  .wm-footer{
+    margin-top:24px;
+    font-size:.72rem;
+    color:#b0b0b0;
+    font-style:italic;
+    text-align:center;
+  }
+
+  .item{display:block;padding:0}
+  .item-main{display:flex;align-items:center;gap:14px;padding:14px 16px;text-decoration:none;color:var(--text)}
+  .badge{width:auto;min-width:46px;padding:0 6px;font-size:.85rem}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px 76px}
+  .chip{font-size:.78rem;font-weight:600;text-decoration:none;color:var(--primary-dark);background:var(--primary-light);border:1px solid #bcd5ec;border-radius:999px;padding:4px 10px}
+  .chip:hover{background:var(--primary);color:#fff}
+  .col .badge{background:var(--primary-dark)}
+  .quiz .badge{background:#F4B740}
+  .updated{font-size:.75rem;color:var(--muted);margin-top:6px}
+  @media (max-width:480px){.chips{padding-left:16px}}
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="kicker">B1 · GIAO TIẾP 1-1</div>
+    <h1>📚 Bài tập ôn — LINH</h1>
+    <p>Note và bài tập ôn sau mỗi buổi học của chị Linh: mẫu câu giao tiếp ở chỗ làm (siêu thị), ngữ pháp và từ vựng.</p>
+    <div class="byline">Ms. Thủy Tiên • Học viên LINH (B1 Giao tiếp 1-1)</div>
+    <div class="updated">Cập nhật 17/11/2026</div>
+  </div>
+  <div class="section">
+    <div class="section-heading">🗓️ Theo buổi học · mới nhất trước</div>
+    <div class="items">
+      <div class="item quiz">
+        <a class="item-main" href="17.11/linh-17-11-sap-xep-cau.html">
+          <div class="badge">17/11</div>
+          <div class="item-body"><div class="item-title">Buổi 17/11 – Sắp xếp từ thành câu</div><div class="item-sub">13 cấu trúc · 39 câu · nhắc nhở khách, sức khoẻ, hiện tại hoàn thành bị động, túi dùng lại</div></div>
+          <div class="item-arrow">›</div>
+        </a><div class="chips"><a class="chip" href="17.11/NOTE%2017.11.docx">📄 Note buổi học (.docx)</a><a class="chip" href="17.11/BAI%20TAP%20DICH%2017.11.docx">📝 Bài tập dịch (.docx)</a></div>
+      </div>
+      <div class="item quiz">
+        <a class="item-main" href="10.11/linh-10-11-sap-xep-cau.html">
+          <div class="badge">10/11</div>
+          <div class="item-body"><div class="item-title">Buổi 10/11 – Sắp xếp từ thành câu</div><div class="item-sub">13 cấu trúc · 39 câu · not…until, not…any more, ba nghĩa của “left”, hỏi lại khi chưa hiểu</div></div>
+          <div class="item-arrow">›</div>
+        </a><div class="chips"><a class="chip" href="10.11/NOTE%2010.11.docx">📄 Note buổi học (.docx)</a><a class="chip" href="10.11/BAI%20TAP%20DICH%2010.11.docx">📝 Bài tập dịch (.docx)</a></div>
+      </div>
+      <div class="item quiz">
+        <a class="item-main" href="03.11/linh-03-11-sap-xep-cau.html">
+          <div class="badge">03/11</div>
+          <div class="item-body"><div class="item-title">Buổi 03/11 – Sắp xếp từ thành câu</div><div class="item-sub">13 cấu trúc · 39 câu · chỉ chỗ hàng trong siêu thị, because &gt;&lt; because of, nghỉ ốm</div></div>
+          <div class="item-arrow">›</div>
+        </a><div class="chips"><a class="chip" href="03.11/NOTE%2003.11.docx">📄 Note buổi học (.docx)</a><a class="chip" href="03.11/BAI%20TAP%20DICH%2003.11.docx">📝 Bài tập dịch (.docx)</a></div>
+      </div>
+      <div class="item quiz">
+        <a class="item-main" href="29.10/linh-29-10-sap-xep-cau.html">
+          <div class="badge">29/10</div>
+          <div class="item-body"><div class="item-title">Buổi 29/10 – Sắp xếp từ thành câu</div><div class="item-sub">13 cấu trúc · 39 câu · mới sang New Zealand, nội quy &amp; quyền lợi, be used to</div></div>
+          <div class="item-arrow">›</div>
+        </a><div class="chips"><a class="chip" href="29.10/NOTE%2029.10.docx">📄 Note buổi học (.docx)</a><a class="chip" href="29.10/BAI%20TAP%20DICH%2029.10.docx">📝 Bài tập dịch (.docx)</a></div>
+      </div>
+      <div class="item quiz">
+        <a class="item-main" href="27.10/linh-27-10-sap-xep-cau.html">
+          <div class="badge">27/10</div>
+          <div class="item-body"><div class="item-title">Buổi 27/10 – Sắp xếp từ thành câu</div><div class="item-sub">15 cấu trúc · 45 câu · tủ đồ, giảm giá nhân viên, nhân viên mới</div></div>
+          <div class="item-arrow">›</div>
+        </a><div class="chips"><a class="chip" href="27.10/NOTE%2027.10.docx">📄 Note buổi học (.docx)</a><a class="chip" href="27.10/BAI%20TAP%20DICH%2027.10.docx">📝 Bài tập dịch (.docx)</a></div>
+      </div>
+      <div class="item quiz">
+        <a class="item-main" href="22.10/linh-22-10-sap-xep-cau.html">
+          <div class="badge">22/10</div>
+          <div class="item-body"><div class="item-title">Buổi 22/10 – Sắp xếp từ thành câu</div><div class="item-sub">11 cấu trúc · 33 câu · chủ đề siêu thị</div></div>
+          <div class="item-arrow">›</div>
+        </a><div class="chips"><a class="chip" href="22.10/NOTE%2022.10.docx">📄 Note buổi học (.docx)</a><a class="chip" href="22.10/BAI%20TAP%20DICH%2022.10.docx">📝 Bài tập dịch (.docx)</a></div>
+      </div>
+      <div class="item quiz">
+        <a class="item-main" href="20.10/linh-20-10-sap-xep-cau.html">
+          <div class="badge">20/10</div>
+          <div class="item-body"><div class="item-title">Buổi 20/10 – Sắp xếp từ thành câu</div><div class="item-sub">15 cấu trúc · 45 câu · used to · … and a half · khen ngợi · nghỉ phép</div></div>
+          <div class="item-arrow">›</div>
+        </a><div class="chips"><a class="chip" href="20.10/NOTE%2020.10.docx">📄 Note buổi học (.docx)</a><a class="chip" href="20.10/BAI%20TAP%20DICH%2020.10.docx">📝 Bài tập dịch (.docx)</a></div>
+      </div>
+    </div>
+    <div class="footer">
+      <b>7 buổi học · 279 câu sắp xếp.</b> Bấm vào bài tập để làm: chọn lần lượt các từ để ghép thành câu hoàn chỉnh, bài sẽ tự chấm. Bấm "📄 Note" để tải note buổi học (có phiên âm). Nên lưu trang này (bookmark) để quay lại nhanh.
+    </div>
+  </div>
+  <div class="wm-footer">© Ms. Thủy Tiên · 0388929741</div>
+</body>
+</html>

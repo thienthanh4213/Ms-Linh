@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sắp xếp câu – Linh B1 27.10</title>
+<style>
+:root{
+  --bg:#f6f4ef; --card:#ffffff; --ink:#1f2328; --muted:#6b7078; --line:#e3dfd6;
+  --accent:#1f5f99; --accent-soft:#e6eef7; --chip:#fff; --chip-line:#cfd6df;
+  --ok:#1d7a46; --ok-soft:#e3f3ea; --bad:#b3261e; --bad-soft:#fbe7e5; --hint:#8a5a00; --hint-soft:#fff3d6;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16181c; --card:#1f2228; --ink:#e8e9eb; --muted:#9aa0a8; --line:#2f333a;
+    --accent:#7fb2e6; --accent-soft:#22303f; --chip:#262a31; --chip-line:#3a404a;
+    --ok:#6cc893; --ok-soft:#1d3127; --bad:#f08a82; --bad-soft:#3a2222; --hint:#e8c06a; --hint-soft:#3a3120;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 48px}
+header h1{font-size:1.35rem;margin:0 0 2px}
+header p{margin:0;color:var(--muted);font-size:.92rem}
+.bar{display:flex;align-items:center;gap:12px;margin:18px 0 10px;flex-wrap:wrap}
+.progress{flex:1;min-width:160px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress>i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.score{font-weight:600;font-size:.95rem;white-space:nowrap}
+select{font:inherit;font-size:.9rem;padding:6px 8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);max-width:100%}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 16px}
+.dot{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:.8rem;cursor:pointer;padding:0}
+.dot.cur{border-color:var(--accent);color:var(--accent);font-weight:700}
+.dot.ok{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.dot.shown{background:var(--hint-soft);border-color:var(--hint);color:var(--hint)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 18px}
+.tag{display:inline-block;font-size:.78rem;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:3px 10px;border-radius:99px}
+.form{font-size:.85rem;color:var(--muted);font-style:italic;margin-top:6px}
+.vi{font-size:1.15rem;font-weight:600;margin:14px 0 16px}
+.num{color:var(--muted);font-weight:500;margin-right:4px}
+.answer{min-height:58px;border:2px dashed var(--chip-line);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;transition:border-color .2s,background .2s}
+.answer.ok{border-style:solid;border-color:var(--ok);background:var(--ok-soft)}
+.answer.bad{border-style:solid;border-color:var(--bad);background:var(--bad-soft)}
+.answer .ph{color:var(--muted);font-size:.9rem;padding:0 6px}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;min-height:44px}
+.chip{font:inherit;font-size:1rem;padding:7px 12px;border-radius:10px;border:1px solid var(--chip-line);background:var(--chip);color:var(--ink);cursor:pointer;box-shadow:0 1px 0 var(--chip-line);user-select:none}
+.chip:hover{border-color:var(--accent)}
+.chip.used{visibility:hidden}
+.answer .chip{background:var(--accent-soft);border-color:transparent}
+.answer .chip.fixed{background:var(--hint-soft);color:var(--hint);cursor:default}
+.answer .chip.wrong{background:var(--bad-soft);color:var(--bad)}
+.punct{font-size:1.2rem;font-weight:700;color:var(--muted)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+button.b{font:inherit;font-size:.92rem;padding:8px 14px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+button.b.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) button.b.pri{color:#10151b}}
+button.b:disabled{opacity:.45;cursor:default}
+.msg{margin-top:14px;font-size:.95rem;min-height:1.4em}
+.msg.ok{color:var(--ok);font-weight:600}
+.msg.bad{color:var(--bad)}
+.msg.show{color:var(--hint)}
+.nav{display:flex;justify-content:space-between;margin-top:16px;gap:8px}
+.done{display:none;text-align:center;padding:28px 18px}
+.done h2{margin:0 0 6px}
+@media (max-width:480px){.vi{font-size:1.05rem}.chip{font-size:.95rem;padding:6px 10px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Sắp xếp từ thành câu hoàn chỉnh</h1>
+    <p>1-1 Linh B1 · Ôn bài 27.10 · Chủ đề: Làm việc ở siêu thị</p>
+  </header>
+
+  <div class="bar">
+    <div class="progress"><i id="pbar"></i></div>
+    <div class="score" id="score">0 / 45</div>
+    <select id="filter" aria-label="Chọn cấu trúc"></select>
+  </div>
+  <div class="dots" id="dots"></div>
+
+  <div class="card" id="card">
+    <span class="tag" id="tag"></span>
+    <div class="form" id="form"></div>
+    <div class="vi"><span class="num" id="num"></span><span id="vi"></span></div>
+    <div class="answer" id="answer"></div>
+    <div class="bank" id="bank"></div>
+    <div class="btns">
+      <button class="b pri" id="check">Kiểm tra</button>
+      <button class="b" id="hint">Gợi ý 1 từ</button>
+      <button class="b" id="reset">Làm lại</button>
+      <button class="b" id="show">Xem đáp án</button>
+    </div>
+    <div class="msg" id="msg"></div>
+    <div class="nav">
+      <button class="b" id="prev">← Câu trước</button>
+      <button class="b" id="next">Câu sau →</button>
+    </div>
+  </div>
+
+  <div class="card done" id="done">
+    <h2>Hoàn thành! 🎉</h2>
+    <p id="doneText"></p>
+    <button class="b pri" id="restart">Làm lại từ đầu</button>
+  </div>
+</div>
+
+<script>
+const S=[["Câu hỏi với \"What is …?\"", "What is + the + N …?", [["Số tủ đồ của bạn là bao nhiêu?", "What is your locker number?"], ["Số lớn nhất là bao nhiêu?", "What is the maximum number?"], ["Tên người giám sát của Lan là gì?", "What is Lan's supervisor's name?"]]], ["Câu bị động ở hiện tại", "S + am / is / are + V3", [["Những cái tủ này chỉ dành cho nhân viên.", "These lockers are just for employees."], ["Nhân viên được hưởng ưu đãi giảm giá.", "Employees are offered a staff discount."], ["Ở New Zealand nó được gọi là club staff.", "In New Zealand it is called club staff."]]], ["Câu bị động ở tương lai", "S + will be + V3", [["Nó sẽ được bỏ vào thùng rác.", "It will be put into the waste bin."], ["Đồng phục sẽ được đưa cho cô ấy vào thứ Hai.", "The uniform will be given to her on Monday."], ["Hàng mới sẽ được châm lên kệ vào sáng mai.", "The new stock will be filled on the shelves tomorrow morning."]]], ["Hỏi về điều kiện", "Are there any + N số nhiều …?", [["Có điều kiện gì để được giảm 5% không?", "Are there any conditions to get the 5% discount?"], ["Có quy định nào về đồng phục không?", "Are there any rules about the uniform?"], ["Có thùng rác nào ở bên ngoài cửa hàng không?", "Are there any waste bins outside the store?"]]], ["Đăng ký & cài đặt", "download / install the app · sign up for an account", [["Bạn cần tải ứng dụng về trước.", "You need to download the app first."], ["Em đã đăng ký một tài khoản rồi.", "I have signed up for an account."], ["Hãy cài ứng dụng rồi đăng ký một tài khoản.", "Please install the app and sign up for an account."]]], ["Nhận xét về người", "S + be + adj, but + S + be + adj", [["Cậu ấy trẻ và đẹp trai, nhưng khá trẻ con.", "He is young and good-looking, but he is quite childish."], ["Cậu ấy làm thì ít mà nói thì nhiều.", "He works a little, but he talks a lot."], ["Cô ấy kiên nhẫn, nhưng hôm nay cô ấy đang vội.", "She is patient, but she is in a hurry today."]]], ["Phàn nàn", "complain about + N · have no complaints", [["Sếp có phàn nàn về cậu ấy không?", "Does the boss complain about him?"], ["Sếp không có phàn nàn gì.", "The boss has no complaints."], ["Khách hàng phàn nàn về giá.", "The customers complain about the price."]]], ["Hỏi trải nghiệm & trả lời ngắn", "Have you ever + V3 …? — Hardly ever!", [["Bạn đã bao giờ bị lạc chưa?", "Have you ever got lost?"], ["Bạn đã bao giờ làm ca đêm chưa?", "Have you ever worked the night shift?"], ["Chị quản lý đã bao giờ phàn nàn chưa?", "Has the manager ever complained?"]]], ["Nêu kết quả", "Therefore, … / Thus, … / Hence, …", [["Hôm nay siêu thị rất đông. Vì vậy, chúng tôi ở lại muộn.", "The supermarket was very busy today. Therefore, we stayed late."], ["Hàng sắp hết. Vì vậy, em cần châm thêm.", "The stock is running low. Therefore, I need to fill more."], ["Cô ấy bắt đầu làm rất sớm. Vì vậy, cô ấy thấy mệt.", "She starts work very early. Therefore, she feels tired."]]], ["Để dành tiền", "save money for + N / V-ing", [["Lan đang để dành tiền mua ô tô.", "Lan is saving money for a car."], ["Em để dành tiền để mua những thứ cần thiết.", "I save money for buying necessary things."], ["Tại sao Lan lại để dành tiền mua ô tô?", "Why is Lan saving money for a car?"]]], ["Hỏi thời gian làm việc", "How long has + S + V3 …?", [["Cô ấy làm ở siêu thị này được bao lâu rồi?", "How long has she worked at this supermarket?"], ["Đây là tuần đầu tiên của cô ấy.", "This is her first week."], ["Trong tuần đầu tiên cô ấy cần làm những gì?", "What does she need to do during her first week?"]]], ["offer & provide", "offer somebody something · provide somebody with something", [["Cửa hàng đưa cho cô ấy một bộ đồng phục.", "The store offers her a uniform."], ["Cửa hàng cung cấp cho cô ấy một bộ đồng phục.", "The store provides her with a uniform."], ["Cô ấy có cần mặc đồng phục không?", "Does she need to wear the uniform?"]]], ["because  ><  because of", "because + S + V · because of + N", [["Cô ấy mệt vì cô ấy bắt đầu làm rất sớm.", "She is tired because she starts work very early."], ["Cô ấy mệt vì giờ làm việc sớm của cô ấy.", "She is tired because of her early working time."], ["Em về muộn vì siêu thị rất đông.", "I went home late because the supermarket was very busy."]]], ["Hàng trên kệ", "… is running low · fill the shelves", [["Sữa sắp hết rồi.", "The milk is running low."], ["Em châm hàng lên kệ xong hết rồi.", "I have already filled my shelves."], ["Thẻ tên bị thiếu.", "The name tag is missing."]]], ["Hẹn làm sau & hỏi thăm", "I'll … later · How's it going?", [["Lát nữa em gọi lại.", "I will call back later."], ["Sau việc này thì em sẽ dọn kho.", "After this, I will tidy the storeroom."], ["Còn bạn thì sao? Làm tới đâu rồi?", "How about you? How is it going?"]]]];
+const KEEP=new Set(["I", "I'm", "Lan", "New", "Zealand", "Monday", "Therefore", "Hardly", "These", "Employees", "The", "She", "He", "You", "What", "Are", "Have", "Has", "Does", "Why", "How", "After", "In", "Please", "This", "It"]);
+const Q=[];
+S.forEach((g,gi)=>g[2].forEach(q=>{
+  const m=q[1].match(/^(.*?)([.?!])$/);
+  const body=m?m[1]:q[1], end=m?m[2]:'';
+  const words=body.split(' ');
+  const alts=[body,...(q[2]||[]).map(a=>a.replace(/[.?!]$/,''))].map(a=>a.toLowerCase().split(' ').join(' '));
+  Q.push({g:gi,name:g[0],form:g[1],vi:q[0],full:q[1],words,end,alts});
+}));
+const state=Q.map(()=>({placed:[],status:'',order:null,fixed:0}));
+let cur=0, filterG=-1;
+const $=id=>document.getElementById(id);
+
+function shuffle(n){
+  let a;
+  do{a=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}}
+  while(n>2&&a.every((v,i)=>v===i));
+  return a;
+}
+function disp(q,i){const w=q.words[i];return (i===0&&!KEEP.has(w))?w.charAt(0).toLowerCase()+w.slice(1):w}
+function visible(){return Q.map((q,i)=>i).filter(i=>filterG<0||Q[i].g===filterG)}
+
+function render(){
+  const q=Q[cur], st=state[cur];
+  if(!st.order) st.order=shuffle(q.words.length);
+  $('tag').textContent=(q.g+1)+'. '+q.name;
+  $('form').textContent=q.form;
+  $('num').textContent=(cur+1)+'.';
+  $('vi').textContent=q.vi;
+  const ans=$('answer'), bank=$('bank');
+  ans.className='answer'+(st.status==='ok'||st.status==='shown'?' ok':st.status==='bad'?' bad':'');
+  ans.innerHTML='';
+  if(!st.placed.length) ans.innerHTML='<span class="ph">Bấm vào các từ bên dưới để ghép câu…</span>';
+  st.placed.forEach((wi,pos)=>{
+    const c=document.createElement('button');c.className='chip';c.textContent=disp(q,wi);
+    if(pos<st.fixed) c.classList.add('fixed');
+    if(st.status==='bad'&&st.wrongFrom!=null&&pos>=st.wrongFrom) c.classList.add('wrong');
+    const locked=st.status==='ok'||st.status==='shown';
+    c.onclick=()=>{ if(locked||pos<st.fixed) return; st.placed.splice(pos,1); st.status=''; render(); };
+    ans.appendChild(c);
+  });
+  if(st.placed.length===q.words.length&&q.end){const p=document.createElement('span');p.className='punct';p.textContent=q.end;ans.appendChild(p)}
+  bank.innerHTML='';
+  st.order.forEach(wi=>{
+    const c=document.createElement('button');c.className='chip';c.textContent=disp(q,wi);
+    if(st.placed.includes(wi)) c.classList.add('used');
+    c.onclick=()=>{ if(st.status==='ok'||st.status==='shown') return; st.placed.push(wi); st.status=''; render(); if(st.placed.length===q.words.length) check(); };
+    bank.appendChild(c);
+  });
+  const locked=st.status==='ok'||st.status==='shown';
+  ['check','hint','show'].forEach(id=>$(id).disabled=locked);
+  const msg=$('msg');
+  msg.className='msg'+(st.status?' '+st.status:'');
+  msg.textContent=st.status==='ok'?'✔ Chính xác! '+q.full:st.status==='shown'?'Đáp án: '+q.full:st.status==='bad'?(st.placed.length<q.words.length?'Câu chưa đủ từ, hãy ghép tiếp.':'✘ Chưa đúng, các từ màu đỏ cần sắp xếp lại.'):'';
+  const v=visible(), k=v.indexOf(cur);
+  $('prev').disabled=k<=0; $('next').textContent=k>=v.length-1?'Xem kết quả →':'Câu sau →';
+  dots(); stats();
+}
+function sentence(st,q){return st.placed.map(i=>q.words[i]).join(' ').toLowerCase()}
+function check(){
+  const q=Q[cur], st=state[cur];
+  if(st.placed.length<q.words.length){st.status='bad';st.wrongFrom=null;render();return}
+  const s=sentence(st,q);
+  if(q.alts.includes(s)){st.status='ok'}
+  else{
+    st.status='bad';
+    const tgt=q.words.map(w=>w.toLowerCase()), got=st.placed.map(i=>q.words[i].toLowerCase());
+    let k=0;while(k<got.length&&got[k]===tgt[k])k++; st.wrongFrom=k;
+  }
+  render();
+}
+function hint(){
+  const q=Q[cur], st=state[cur];
+  const tgt=q.words.map(w=>w.toLowerCase()), got=st.placed.map(i=>q.words[i].toLowerCase());
+  let k=0;while(k<got.length&&got[k]===tgt[k])k++;
+  const keep=st.placed.slice(0,k);
+  const need=tgt[k]; if(need==null) return;
+  const wi=q.words.findIndex((w,i)=>w.toLowerCase()===need&&!keep.includes(i));
+  st.placed=[...keep,wi]; st.fixed=Math.max(st.fixed,k+1); st.status='';
+  render(); if(st.placed.length===q.words.length) check();
+}
+function stats(){
+  const v=visible();
+  const ok=v.filter(i=>state[i].status==='ok').length;
+  $('score').textContent=ok+' / '+v.length+' đúng';
+  const doneN=v.filter(i=>state[i].status==='ok'||state[i].status==='shown').length;
+  $('pbar').style.width=(doneN/v.length*100)+'%';
+}
+function dots(){
+  const d=$('dots');d.innerHTML='';
+  visible().forEach(i=>{
+    const b=document.createElement('button');b.className='dot'+(i===cur?' cur':'')+(state[i].status==='ok'?' ok':state[i].status==='shown'?' shown':'');
+    b.textContent=i+1;b.onclick=()=>{cur=i;showCard();render()};d.appendChild(b);
+  });
+}
+function showCard(){$('card').style.display='';$('done').style.display='none'}
+function finish(){
+  const v=visible(), ok=v.filter(i=>state[i].status==='ok').length, sh=v.filter(i=>state[i].status==='shown').length;
+  $('card').style.display='none';$('done').style.display='block';
+  $('doneText').textContent=`Tự làm đúng ${ok}/${v.length} câu`+(sh?` · xem đáp án ${sh} câu`:'')+`. Câu chưa làm: ${v.length-ok-sh}.`;
+  dots();
+}
+$('check').onclick=check;
+$('hint').onclick=hint;
+$('reset').onclick=()=>{const st=state[cur];st.placed=[];st.fixed=0;st.status='';st.order=shuffle(Q[cur].words.length);render()};
+$('show').onclick=()=>{const q=Q[cur],st=state[cur];st.placed=q.words.map((w,i)=>i);st.fixed=0;st.status='shown';render()};
+$('prev').onclick=()=>{const v=visible(),k=v.indexOf(cur);if(k>0){cur=v[k-1];render()}};
+$('next').onclick=()=>{const v=visible(),k=v.indexOf(cur);if(k<v.length-1){cur=v[k+1];render()}else finish()};
+$('restart').onclick=()=>{visible().forEach(i=>state[i]={placed:[],status:'',order:null,fixed:0});cur=visible()[0];showCard();render()};
+const f=$('filter');
+f.innerHTML='<option value="-1">Tất cả cấu trúc (45 câu)</option>'+S.map((g,i)=>`<option value="${i}">${i+1}. ${g[0]}</option>`).join('');
+f.onchange=()=>{filterG=+f.value;cur=visible()[0];showCard();render()};
+render();
+</script>
+</body>
+</html>
